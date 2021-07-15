@@ -1,4 +1,4 @@
-package com.kyc3.timestampap.config
+package com.kyc3.timestampap.config.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.stereotype.Component

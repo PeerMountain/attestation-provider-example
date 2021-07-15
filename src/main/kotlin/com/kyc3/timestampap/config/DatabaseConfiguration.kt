@@ -1,5 +1,6 @@
 package com.kyc3.timestampap.config
 
+import com.kyc3.timestampap.config.properties.DatasourceProperties
 import io.r2dbc.spi.ConnectionFactories
 import io.r2dbc.spi.ConnectionFactory
 import io.r2dbc.spi.ConnectionFactoryOptions

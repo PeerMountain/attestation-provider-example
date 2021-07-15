@@ -18,14 +18,26 @@ repositories {
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
+
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
   implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+
   implementation("org.flywaydb:flyway-core")
+
+  implementation("org.igniterealtime.smack:smack-tcp:4.3.5")
+  implementation("org.igniterealtime.smack:smack-im:4.3.5")
+  implementation("org.igniterealtime.smack:smack-extensions:4.3.5")
+  implementation("org.igniterealtime.smack:smack-java7:4.3.5")
+
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+
   implementation("org.springframework:spring-jdbc")
+
   runtimeOnly("io.r2dbc:r2dbc-postgresql")
+
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("io.projectreactor:reactor-test")
 }
