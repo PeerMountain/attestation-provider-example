@@ -4,3 +4,9 @@ datasource:
   username: ${DATABASE_USERNAME:tap}
   password: ${DATABASE_PASSWORD:tap}
   database: ${DATASOURCE_DATABASE:tap}
+
+xmpp:
+  domain: ${XMPP_DOMAIN:jabber.hot-chilli.net}
+  userName: ${XMPP_USERNAME:timestamp-ap}
+  password: ${XMPP_PASSWORD:timestamp-ap}
+  host: ${XMPP_HOST:jabber.hot-chilli.net}
