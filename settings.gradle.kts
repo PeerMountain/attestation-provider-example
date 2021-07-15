@@ -1,3 +1,3 @@
 apply(from = "./repositories.gradle.kts")
 
-rootProject.name = "oracle"
+rootProject.name = "timestamp-ap"
