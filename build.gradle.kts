@@ -36,6 +36,8 @@ dependencies {
 
   implementation("org.springframework:spring-jdbc")
 
+  implementation("com.kyc3:oracle-definitions:396bb37")
+
   runtimeOnly("io.r2dbc:r2dbc-postgresql")
 
   testImplementation("org.springframework.boot:spring-boot-starter-test")
