@@ -1,0 +1,6 @@
+datasource:
+  host: ${DATASOURCE_HOST:localhost}
+  port: ${DATASOURCE_PORT:5433}
+  username: ${DATABASE_USERNAME:tap}
+  password: ${DATABASE_PASSWORD:tap}
+  database: ${DATASOURCE_DATABASE:tap}

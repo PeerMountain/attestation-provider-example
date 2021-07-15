@@ -26,7 +26,6 @@ dependencies {
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
   implementation("org.springframework:spring-jdbc")
   runtimeOnly("io.r2dbc:r2dbc-postgresql")
-  runtimeOnly("org.postgresql:postgresql")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("io.projectreactor:reactor-test")
 }
