@@ -36,7 +36,7 @@ dependencies {
 
   implementation("org.springframework:spring-jdbc")
 
-  implementation("com.kyc3:oracle-definitions:396bb37")
+  implementation("com.kyc3:oracle-definitions:594e071")
 
   runtimeOnly("io.r2dbc:r2dbc-postgresql")
 

@@ -16,8 +16,15 @@ class GenerateChallengeListener(
     GenerateChallenge.GenerateChallengeRequest::class.java
 
   override fun accept(event: Any, chat: Chat): GenerateChallenge.GenerateChallengeResponse =
-    GenerateChallenge.GenerateChallengeResponse.newBuilder()
-      .setChallenge(ChallengeOuterClass.Challenge.newBuilder()
-        .setData(generateChallengeService.generateChallenge()))
-      .build()
+    event.unpack(type())
+      .let {
+        GenerateChallenge.GenerateChallengeResponse.newBuilder()
+          .setUserAddress(it.userAddress)
+          .setNftType(it.nftType)
+          .setChallenge(
+            ChallengeOuterClass.Challenge.newBuilder()
+              .setData(generateChallengeService.generateChallenge())
+          )
+          .build()
+      }
 }
