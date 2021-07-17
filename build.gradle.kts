@@ -11,6 +11,8 @@ group = "com.kyc3"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
+val testContainerVersion = "1.15.3"
+
 repositories {
   mavenCentral()
 }
@@ -36,12 +38,16 @@ dependencies {
 
   implementation("org.springframework:spring-jdbc")
 
-  implementation("com.kyc3:oracle-definitions:594e071")
+  implementation("com.kyc3:oracle-definitions:ab2ffbc")
 
   runtimeOnly("io.r2dbc:r2dbc-postgresql")
+  implementation("org.postgresql:postgresql:42.2.23")
 
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("io.projectreactor:reactor-test")
+
+  testImplementation("org.testcontainers:testcontainers:$testContainerVersion")
+  testImplementation("org.testcontainers:postgresql:$testContainerVersion")
 }
 
 tasks.withType<KotlinCompile> {

@@ -4,27 +4,33 @@ import com.google.protobuf.Any
 import com.kyc3.ap.challenge.ChallengeOuterClass
 import com.kyc3.ap.challenge.GenerateChallenge
 import com.kyc3.timestampap.service.ChallengeService
+import com.kyc3.timestampap.service.UserDataService
 import org.jivesoftware.smack.chat2.Chat
 import org.springframework.stereotype.Component
+import reactor.core.publisher.Mono
 
 @Component
 class GenerateChallengeListener(
-  private val generateChallengeService: ChallengeService
+  private val generateChallengeService: ChallengeService,
+  private val userDataService: UserDataService
 ) :
   APIListener<GenerateChallenge.GenerateChallengeRequest, GenerateChallenge.GenerateChallengeResponse> {
   override fun type(): Class<GenerateChallenge.GenerateChallengeRequest> =
     GenerateChallenge.GenerateChallengeRequest::class.java
 
-  override fun accept(event: Any, chat: Chat): GenerateChallenge.GenerateChallengeResponse =
+  override fun accept(event: Any, chat: Chat): Mono<GenerateChallenge.GenerateChallengeResponse> =
     event.unpack(type())
-      .let {
-        GenerateChallenge.GenerateChallengeResponse.newBuilder()
-          .setUserAddress(it.userAddress)
-          .setNftType(it.nftType)
-          .setChallenge(
-            ChallengeOuterClass.Challenge.newBuilder()
-              .setData(generateChallengeService.generateChallenge())
-          )
-          .build()
+      .let { event ->
+        userDataService.createUser(event.userAddress)
+          .map {
+            GenerateChallenge.GenerateChallengeResponse.newBuilder()
+              .setUserAddress(event.userAddress)
+              .setNftType(event.nftType)
+              .setChallenge(
+                ChallengeOuterClass.Challenge.newBuilder()
+                  .setData(generateChallengeService.generateChallenge())
+              )
+              .build()
+          }
       }
 }
