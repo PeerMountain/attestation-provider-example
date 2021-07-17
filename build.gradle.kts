@@ -11,6 +11,8 @@ group = "com.kyc3"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
+val testContainerVersion = "1.15.3"
+
 repositories {
   mavenCentral()
 }
@@ -43,6 +45,9 @@ dependencies {
 
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("io.projectreactor:reactor-test")
+
+  testImplementation("org.testcontainers:testcontainers:$testContainerVersion")
+  testImplementation("org.testcontainers:postgresql:$testContainerVersion")
 }
 
 tasks.withType<KotlinCompile> {
