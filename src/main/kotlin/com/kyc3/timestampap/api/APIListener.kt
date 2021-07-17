@@ -22,7 +22,10 @@ class APIListener(
       log.info("process='APIListener.listenToOracle' from='${from.asUnescapedString()}' message='received an event'")
       messageParser.parseMessage(message)
         .let { oracleRouter.route(it, chat) }
-        ?.let { oracleApiResponse.responseToClient(chat, it) }
+        .subscribe {
+          oracleApiResponse.responseToClient(chat, it)
+        }
+
     }
   }
 }

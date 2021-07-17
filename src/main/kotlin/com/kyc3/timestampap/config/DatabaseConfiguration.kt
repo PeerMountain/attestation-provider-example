@@ -7,6 +7,7 @@ import io.r2dbc.spi.ConnectionFactoryOptions
 import io.r2dbc.spi.ConnectionFactoryOptions.*
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.data.r2dbc.core.R2dbcEntityTemplate
 
 
 @Configuration
@@ -27,5 +28,7 @@ class DatabaseConfiguration(
         .build()
     )
 
-
+  @Bean
+  fun r2dbcEntityTemplate(connectionFactory: ConnectionFactory): R2dbcEntityTemplate =
+    R2dbcEntityTemplate(connectionFactory)
 }
