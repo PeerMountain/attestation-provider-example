@@ -1,6 +1,6 @@
-package com.kyc3.timestampap.api
+package com.kyc3.timestampap.api.xmpp
 
-import com.kyc3.timestampap.api.router.APIRouter
+import com.kyc3.timestampap.api.xmpp.router.APIRouter
 import org.jivesoftware.smack.chat2.ChatManager
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service

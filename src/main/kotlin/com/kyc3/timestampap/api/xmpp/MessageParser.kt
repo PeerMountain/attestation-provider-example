@@ -1,4 +1,4 @@
-package com.kyc3.timestampap.api
+package com.kyc3.timestampap.api.xmpp
 
 import org.springframework.stereotype.Service
 import org.jivesoftware.smack.packet.Message

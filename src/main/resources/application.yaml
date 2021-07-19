@@ -18,6 +18,10 @@ xmpp:
   password: ${XMPP_PASSWORD:timestamp-ap}
   host: ${XMPP_HOST:jabber.hot-chilli.net}
 
+attestation:
+  redirect:
+    base_url: ${REDIRECT_URL:localhost:8081}/attestation/validate
+
 server:
   port: 8081
 

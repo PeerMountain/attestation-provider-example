@@ -1,4 +1,4 @@
-package com.kyc3.timestampap.api.router
+package com.kyc3.timestampap.api.xmpp.router
 
 import com.google.protobuf.GeneratedMessageV3
 import com.kyc3.MessageOuterClass

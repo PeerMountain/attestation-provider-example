@@ -11,3 +11,11 @@ CREATE TABLE challenge
     challenge TEXT,
     used      BOOLEAN
 );
+
+CREATE TABLE attestation_url
+(
+    id              BIGSERIAL PRIMARY KEY,
+    user_id         BIGINT REFERENCES user_data (id),
+    token           TEXT      NOT NULL,
+    expiration_time TIMESTAMP NOT NULL
+);

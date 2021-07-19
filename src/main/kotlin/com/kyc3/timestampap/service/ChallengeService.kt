@@ -34,17 +34,16 @@ class ChallengeService(
           }
       }
 
-  fun useCurrentChallenge(userAddress: String, challenge: String) =
+  fun useCurrentChallenge(userAddress: String, challenge: String): Mono<Int> =
     challengeRepository.updateChallenge(userAddress, challenge, true)
 
 
   @Transactional
-  fun verifyChallenge(request: VerifyChallenge.VerifyChallengeRequest): Mono<String> =
+  fun verifyChallenge(request: VerifyChallenge.VerifyChallengeRequest): Mono<Int> =
     web3JService.verifySignature(request.challenge, request.signedChallenge, request.userAddress)
       .takeIf { it }
       .let { Mono.justOrEmpty(it) }
       .flatMap { useCurrentChallenge(request.userAddress, request.challenge) }
-      .map { "redirect_url" }
       .switchIfEmpty(Mono.error(RuntimeException("Signature verification error")))
 
 }
