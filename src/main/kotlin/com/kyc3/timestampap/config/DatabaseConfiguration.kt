@@ -8,6 +8,7 @@ import io.r2dbc.spi.ConnectionFactoryOptions.*
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate
+import org.springframework.r2dbc.connection.R2dbcTransactionManager
 
 
 @Configuration
@@ -31,4 +32,8 @@ class DatabaseConfiguration(
   @Bean
   fun r2dbcEntityTemplate(connectionFactory: ConnectionFactory): R2dbcEntityTemplate =
     R2dbcEntityTemplate(connectionFactory)
+
+  @Bean
+  fun r2dbcTransactionManager(connectionFactory: ConnectionFactory): R2dbcTransactionManager =
+    R2dbcTransactionManager(connectionFactory)
 }
