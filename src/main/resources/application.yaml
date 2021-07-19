@@ -20,3 +20,6 @@ xmpp:
 
 server:
   port: 8081
+
+web3:
+  host: ${WEB3_HOST:http://localhost:8545}

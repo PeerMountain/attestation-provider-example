@@ -38,6 +38,8 @@ dependencies {
 
   implementation("org.springframework:spring-jdbc")
 
+  implementation("org.web3j:core:5.0.0")
+
   implementation("com.kyc3:oracle-definitions:ab2ffbc")
 
   runtimeOnly("io.r2dbc:r2dbc-postgresql")
