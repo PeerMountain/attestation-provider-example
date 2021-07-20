@@ -37,7 +37,7 @@ class UserDataRepository(
   fun findByAddress(userAddress: String): Mono<UserEntity> =
     template.selectOne(
       Query.query(
-        Criteria.where("user_address").`is`(userAddress)
+        Criteria.where("address").`is`(userAddress)
       ),
       UserEntity::class.java
     )
