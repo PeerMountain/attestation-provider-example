@@ -39,5 +39,8 @@ class AttestationUrlService(
       }
       .map { "${attestationUrlProperties.baseUrl}?token=${it.token}" }
 
+  @Transactional
+  fun verifyToken(token: String, userAddress: String): Mono<AttestationUrlEntity> =
+    attestationUrlRepository.findNotExpiredToken(token, userAddress)
 
 }
