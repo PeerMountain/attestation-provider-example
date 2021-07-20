@@ -40,6 +40,9 @@ dependencies {
 
   implementation("org.web3j:core:5.0.0")
 
+  implementation("org.apache.commons:commons-lang3:3.12.0")
+
+
   implementation("com.kyc3:oracle-definitions:ab2ffbc")
 
   runtimeOnly("io.r2dbc:r2dbc-postgresql")

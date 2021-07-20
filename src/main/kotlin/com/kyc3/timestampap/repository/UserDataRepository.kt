@@ -2,11 +2,16 @@ package com.kyc3.timestampap.repository
 
 import com.kyc3.timestampap.repository.entity.UserEntity
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate
+import org.springframework.data.relational.core.query.Criteria
+import org.springframework.data.relational.core.query.Query
 import org.springframework.r2dbc.core.DatabaseClient
 import org.springframework.stereotype.Repository
+import org.springframework.transaction.annotation.Propagation
+import org.springframework.transaction.annotation.Transactional
 import reactor.core.publisher.Mono
 
 @Repository
+@Transactional(propagation = Propagation.MANDATORY)
 class UserDataRepository(
   private val template: R2dbcEntityTemplate,
   private val databaseClient: DatabaseClient
@@ -29,4 +34,11 @@ class UserDataRepository(
         )
       }
 
+  fun findByAddress(userAddress: String): Mono<UserEntity> =
+    template.selectOne(
+      Query.query(
+        Criteria.where("user_address").`is`(userAddress)
+      ),
+      UserEntity::class.java
+    )
 }

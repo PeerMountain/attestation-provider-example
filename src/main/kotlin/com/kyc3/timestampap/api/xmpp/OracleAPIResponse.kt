@@ -1,4 +1,4 @@
-package com.kyc3.timestampap.api
+package com.kyc3.timestampap.api.xmpp
 
 import com.google.protobuf.Any
 import com.google.protobuf.GeneratedMessageV3
