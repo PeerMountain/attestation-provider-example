@@ -20,7 +20,7 @@ xmpp:
 
 attestation:
   redirect:
-    base_url: ${REDIRECT_URL:localhost:4021}/attestation
+    base_url: ${REDIRECT_URL:http://localhost:4201}/attestation
 
 server:
   port: 8081
