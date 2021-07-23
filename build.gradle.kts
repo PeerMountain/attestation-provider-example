@@ -42,6 +42,7 @@ dependencies {
 
   implementation("org.apache.commons:commons-lang3:3.12.0")
 
+  implementation("org.hibernate.validator:hibernate-validator:7.0.1.Final")
 
   implementation("com.kyc3:oracle-definitions:ab2ffbc")
 
