@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional
 import reactor.core.publisher.Mono
 
 @Service
-class ChallengeVerificationService(
+class VerifyChallengeListenerService(
   private val challengeService: ChallengeService,
   private val attestationUrlService: AttestationUrlService
 ){

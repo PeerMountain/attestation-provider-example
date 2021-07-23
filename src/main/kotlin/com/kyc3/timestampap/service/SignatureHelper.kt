@@ -2,6 +2,7 @@ package com.kyc3.timestampap.service
 
 import org.web3j.crypto.Sign
 import org.web3j.crypto.Sign.SignatureData
+import org.web3j.utils.Numeric
 
 
 class SignatureHelper {
@@ -17,7 +18,11 @@ class SignatureHelper {
           )
         }
 
-    fun String.decodeHex(): ByteArray {
+    fun toString(signature: SignatureData): String =
+      (signature.r + signature.s + signature.v)
+        .let { "0x${Numeric.toHexStringNoPrefix(it)}" }
+
+    private fun String.decodeHex(): ByteArray {
       require(length % 2 == 0) { "Must have an even length" }
 
       return chunked(2)
