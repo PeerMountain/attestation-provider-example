@@ -11,6 +11,7 @@ import org.web3j.abi.datatypes.generated.Bytes32
 import org.web3j.crypto.ECKeyPair
 import org.web3j.crypto.Hash
 import org.web3j.crypto.Sign
+import org.web3j.utils.Numeric
 import reactor.core.publisher.Mono
 import java.time.LocalDateTime
 
@@ -45,13 +46,19 @@ class AttestationService(
   fun signAttestationData(entity: AttestationEntity): Mono<AttestationEntity> =
     packerParametersEncoder.encodeParameters(
       listOf(
-        Bytes32(entity.hashKeyArray.toByteArray()),
+        Bytes32(Numeric.hexStringToByteArray(entity.hashKeyArray)),
         Utf8String(tokenUriResolver.resolveUri(entity)),
-        Bytes32(entity.hashedData.toByteArray())
+        Bytes32(Numeric.hexStringToByteArray(entity.hashedData))
       )
     )
       .let { Hash.sha3(it) }
-      .let { entity.copy(signature = Sign.signMessage(it.toByteArray(), ecKeyPair).toString()) }
+      .let { Numeric.hexStringToByteArray(it) }
+      .let { hashForSign ->
+        entity.copy(
+          signature = Sign.signPrefixedMessage(hashForSign, ecKeyPair)
+            .let { sign -> SignatureHelper.toString(sign) }
+        )
+      }
       .let { attestationRepository.updateSignature(it) }
 
   @Transactional

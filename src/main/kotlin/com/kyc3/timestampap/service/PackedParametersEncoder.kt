@@ -2,12 +2,10 @@ package com.kyc3.timestampap.service
 
 import org.springframework.stereotype.Component
 import org.web3j.abi.TypeEncoder
-import org.web3j.abi.datatypes.Address
-import org.web3j.abi.datatypes.Bool
-import org.web3j.abi.datatypes.Bytes
-import org.web3j.abi.datatypes.Type
+import org.web3j.abi.datatypes.*
 import org.web3j.abi.datatypes.generated.Uint256
 import org.web3j.utils.Numeric
+import java.nio.charset.StandardCharsets
 
 @Component
 class PackedParametersEncoder {
@@ -21,11 +19,15 @@ class PackedParametersEncoder {
       is Bool -> encodeBool(type)
       is Uint256 -> TypeEncoder.encode(type)
       is Address -> encodeAddress(type)
-      else -> throw IllegalArgumentException("type is not supported")
+      is Utf8String -> encodeBytes(type.value.toByteArray(StandardCharsets.UTF_8))
+      else -> throw IllegalArgumentException("type: ${type.javaClass.simpleName} is not supported")
     }
 
   private fun encodeBytes(type: Bytes): String =
-    type.value.joinToString("") { it.toUByte().toString(16).padStart(2, '0') }
+    encodeBytes(type.value)
+
+  private fun encodeBytes(bytes: ByteArray) =
+    bytes.joinToString("") { it.toUByte().toString(16).padStart(2, '0') }
 
   private fun encodeBool(type: Bool): String =
     ByteArray(1)

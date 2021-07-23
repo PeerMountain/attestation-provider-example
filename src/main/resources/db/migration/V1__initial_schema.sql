@@ -27,5 +27,6 @@ CREATE TABLE attestation
     attestation_data TEXT      NOT NULL,
     attestation_time TIMESTAMP NOT NULL,
     hash_key_array   TEXT      NOT NULL,
+    hashed_data      TEXT      NOT NULL,
     signature        TEXT
 )
