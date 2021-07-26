@@ -1,6 +1,7 @@
 package com.kyc3.timestampap.api.rest
 
 import com.kyc3.timestampap.api.rest.model.AttestationDataDto
+import com.kyc3.timestampap.api.rest.model.AttestationDataResponse
 import com.kyc3.timestampap.repository.entity.AttestationEntity
 import com.kyc3.timestampap.service.AttestationService
 import com.kyc3.timestampap.service.AttestationUrlService
@@ -17,7 +18,7 @@ class AttestationController(
 ) {
 
   @PostMapping
-  fun attestateData(@Valid @RequestBody request: AttestationDataDto): Mono<AttestationEntity> =
+  fun attestateData(@Valid @RequestBody request: AttestationDataDto): Mono<AttestationDataResponse> =
     tokenService.verifyToken(request.token, request.userAddress)
       .flatMap { attestationService.createNewAttestation(request) }
 
