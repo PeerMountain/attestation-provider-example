@@ -20,13 +20,13 @@ class GenerateChallengeListener(
 
   override fun accept(event: Any, chat: Chat): Mono<GenerateChallenge.GenerateChallengeResponse> =
     Mono.fromSupplier { event.unpack(type()) }
-      .flatMap { event ->
-        userDataService.createUser(event.userAddress)
+      .flatMap { unpacked ->
+        userDataService.createUser(unpacked.userAddress)
           .flatMap { generateChallengeService.generateChallenge(it.id) }
           .map {
             GenerateChallenge.GenerateChallengeResponse.newBuilder()
-              .setUserAddress(event.userAddress)
-              .setNftType(event.nftType)
+              .setUserAddress(unpacked.userAddress)
+              .setNftType(unpacked.nftType)
               .setChallenge(
                 ChallengeOuterClass.Challenge.newBuilder()
                   .setData(it.challenge)
