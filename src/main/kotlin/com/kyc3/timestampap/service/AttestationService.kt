@@ -1,6 +1,8 @@
 package com.kyc3.timestampap.service
 
 import com.kyc3.timestampap.api.rest.model.AttestationDataDto
+import com.kyc3.timestampap.api.rest.model.AttestationDataResponse
+import com.kyc3.timestampap.config.properties.OracleUrlProperties
 import com.kyc3.timestampap.repository.AttestationRepository
 import com.kyc3.timestampap.repository.UserDataRepository
 import com.kyc3.timestampap.repository.entity.AttestationEntity
@@ -21,11 +23,12 @@ class AttestationService(
   private val userDataRepository: UserDataRepository,
   private val packerParametersEncoder: PackedParametersEncoder,
   private val tokenUriResolver: TokenUriResolver,
-  private val ecKeyPair: ECKeyPair
+  private val ecKeyPair: ECKeyPair,
+  private val oracleUrlProperties: OracleUrlProperties
 ) {
 
   @Transactional
-  fun createNewAttestation(request: AttestationDataDto): Mono<AttestationEntity> =
+  fun createNewAttestation(request: AttestationDataDto): Mono<AttestationDataResponse> =
     userDataRepository.findByAddress(request.userAddress)
       .flatMap {
         attestationRepository.insert(
@@ -41,6 +44,12 @@ class AttestationService(
         )
       }
       .flatMap { signAttestationData(it) }
+      .map {
+        AttestationDataResponse(
+          it,
+          oracleUrlProperties.baseUrl
+        )
+      }
 
   @Transactional
   fun signAttestationData(entity: AttestationEntity): Mono<AttestationEntity> =
