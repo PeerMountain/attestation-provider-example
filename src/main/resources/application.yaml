@@ -23,10 +23,14 @@ attestation:
     base_url: ${REDIRECT_URL:http://localhost:4201}/attestation
 oracle:
   redirect:
-    base_url: ${REDIRECT_URL:http://localhost:4200}/nft/purchase-new
+    base_url: ${REDIRECT_URL:http://localhost:4200}/nft/purchase-complete
 
 wallet:
   privateKey: ${ACCOUNT_PRIVATE_KEY:1bc74ffaff182d4581ea028ac6daab4e290e4b5dd8fc55dd1dfd6e3ebbe5b8f1}
+
+logging:
+  level:
+    root: INFO
 
 server:
   port: 8081

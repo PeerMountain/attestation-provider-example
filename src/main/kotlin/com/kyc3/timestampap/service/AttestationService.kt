@@ -2,6 +2,7 @@ package com.kyc3.timestampap.service
 
 import com.kyc3.timestampap.api.rest.model.AttestationDataDto
 import com.kyc3.timestampap.api.rest.model.AttestationDataResponse
+import com.kyc3.timestampap.api.rest.model.AttestationEntityDto
 import com.kyc3.timestampap.config.properties.OracleUrlProperties
 import com.kyc3.timestampap.repository.AttestationRepository
 import com.kyc3.timestampap.repository.UserDataRepository
@@ -46,7 +47,16 @@ class AttestationService(
       .flatMap { signAttestationData(it) }
       .map {
         AttestationDataResponse(
-          it,
+          AttestationEntityDto(
+            id = it.id,
+            userId = it.userId,
+            attestationData = it.attestationData,
+            attestationTime = it.attestationTime,
+            hashKeyArray = it.hashKeyArray,
+            hashedData = it.hashedData,
+            signature = it.signature,
+            tokenUri = tokenUriResolver.resolveUri(it)
+          ),
           oracleUrlProperties.baseUrl
         )
       }
