@@ -9,26 +9,27 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class XMPPConfiguration(
-    val xmppProperties: XmppProperties
+  val xmppProperties: XmppProperties
 ) {
 
   @Bean
   fun xmppTcpConnectionConfiguration(): XMPPTCPConnectionConfiguration =
-      XMPPTCPConnectionConfiguration.builder()
-          .setXmppDomain(xmppProperties.domain)
-          .setUsernameAndPassword(xmppProperties.userName, xmppProperties.password)
-          .setHost(xmppProperties.host)
-          .build()
+    XMPPTCPConnectionConfiguration.builder()
+      .setXmppDomain(xmppProperties.domain)
+      .setUsernameAndPassword(xmppProperties.userName, xmppProperties.password)
+      .setHost(xmppProperties.host)
+      .setConnectTimeout(50_000)
+      .build()
 
   @Bean
   fun xmppTcpConnection(xmpptcpConnectionConfiguration: XMPPTCPConnectionConfiguration): XMPPTCPConnection =
-      XMPPTCPConnection(xmpptcpConnectionConfiguration)
-          .also {
-            it.connect()
-            it.login()
-          }
+    XMPPTCPConnection(xmpptcpConnectionConfiguration)
+      .also {
+        it.connect()
+        it.login()
+      }
 
   @Bean
   fun chatManager(xmpptcpConnection: XMPPTCPConnection): ChatManager =
-      ChatManager.getInstanceFor(xmpptcpConnection)
+    ChatManager.getInstanceFor(xmpptcpConnection)
 }
