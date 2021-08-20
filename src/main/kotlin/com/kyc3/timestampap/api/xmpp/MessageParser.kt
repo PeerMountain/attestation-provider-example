@@ -1,7 +1,8 @@
 package com.kyc3.timestampap.api.xmpp
 
+import com.kyc3.Message
+import org.jivesoftware.smack.packet.Message as SmackMessage
 import org.springframework.stereotype.Service
-import org.jivesoftware.smack.packet.Message
 import java.util.*
 
 @Service
@@ -9,7 +10,7 @@ class MessageParser(
   private val base64Decoder: Base64.Decoder
 ) {
 
-  fun parseMessage(message: Message): ByteArray =
-    base64Decoder.decode(message.body)
+  fun parseMessage(message: SmackMessage): Message.SignedMessage =
+    Message.SignedMessage.parseFrom(base64Decoder.decode(message.body))
 
 }
