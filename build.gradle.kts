@@ -44,10 +44,16 @@ dependencies {
 
   implementation("org.hibernate.validator:hibernate-validator:7.0.1.Final")
 
-  implementation("com.kyc3:oracle-definitions:ab2ffbc")
+  implementation("com.kyc3:oracle-definitions:0b0ce58")
 
   runtimeOnly("io.r2dbc:r2dbc-postgresql")
   implementation("org.postgresql:postgresql:42.2.23")
+
+  implementation("commons-io:commons-io:2.8.0")
+
+  implementation("com.muquit.libsodiumjna:libsodium-jna:1.0.4") {
+    exclude ("org.slf4j", "slf4j-log4j12")
+  }
 
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("io.projectreactor:reactor-test")

@@ -1,6 +1,7 @@
 package com.kyc3.timestampap.service
 
 import org.springframework.stereotype.Service
+import org.web3j.crypto.ECKeyPair
 import org.web3j.crypto.Hash
 import org.web3j.crypto.Keys
 import org.web3j.crypto.Sign
@@ -9,7 +10,8 @@ import org.web3j.utils.Numeric
 
 @Service
 class Web3JService(
-  private val web3j: Web3j
+  private val web3j: Web3j,
+  private val ecKeyPair: ECKeyPair
 ) {
 
   fun verifySignature(challenge: String, signature: String, address: String): Boolean =
@@ -22,4 +24,8 @@ class Web3JService(
       }
       .let { Keys.getAddress(it) }
       .let { address.contains(it) }
+
+  fun sign(body: String): Sign.SignatureData =
+    Sign.signPrefixedMessage(Numeric.hexStringToByteArray(Hash.sha3String(body)), ecKeyPair)
+
 }
