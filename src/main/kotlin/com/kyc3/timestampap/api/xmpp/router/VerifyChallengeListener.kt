@@ -17,10 +17,13 @@ class VerifyChallengeListener(
 
   override fun accept(event: Any, chat: Chat): Mono<VerifyChallenge.VerifyChallengeResponse> =
     Mono.fromSupplier { event.unpack(type()) }
-      .flatMap { challengeVerificationService.verifyAndGenerateUrl(it) }
-      .map {
-        VerifyChallenge.VerifyChallengeResponse.newBuilder()
-          .setRedirectUrl(it)
-          .build()
+      .flatMap {
+        challengeVerificationService.verifyAndGenerateUrl(it)
+          .map { url ->
+            VerifyChallenge.VerifyChallengeResponse.newBuilder()
+              .setUserPublicKey(it.userPublicKey)
+              .setRedirectUrl(url)
+              .build()
+          }
       }
 }

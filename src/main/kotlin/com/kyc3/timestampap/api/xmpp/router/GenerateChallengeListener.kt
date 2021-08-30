@@ -26,6 +26,7 @@ class GenerateChallengeListener(
           .map {
             GenerateChallenge.GenerateChallengeResponse.newBuilder()
               .setUserAddress(unpacked.userAddress)
+              .setUserPublicKey(unpacked.userPublicKey)
               .setNftType(unpacked.nftType)
               .setChallenge(
                 ChallengeOuterClass.Challenge.newBuilder()
