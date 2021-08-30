@@ -40,6 +40,7 @@ compile:
     DOCKER_HOST: "tcp://dind:2375"
     DOCKER_DRIVER: overlay2
     DOCKER_TLS_CERTDIR: ""
+    LIBSODIUM_PATH: "/usr/lib/x86_64-linux-gnu/libsodium.so"
   script:
     - ./gradlew clean build
   artifacts:
