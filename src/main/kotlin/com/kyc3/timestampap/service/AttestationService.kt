@@ -4,14 +4,13 @@ import com.kyc3.timestampap.api.rest.model.AttestationDataDto
 import com.kyc3.timestampap.api.rest.model.AttestationDataResponse
 import com.kyc3.timestampap.api.rest.model.AttestationEntityDto
 import com.kyc3.timestampap.config.properties.OracleUrlProperties
+import com.kyc3.timestampap.model.EncodeAttestationDataRequest
 import com.kyc3.timestampap.repository.AttestationRepository
 import com.kyc3.timestampap.repository.UserDataRepository
 import com.kyc3.timestampap.repository.entity.AttestationEntity
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import org.web3j.abi.datatypes.Utf8String
-import org.web3j.abi.datatypes.generated.Bytes32
-import org.web3j.crypto.ECKeyPair
+import org.web3j.crypto.Credentials
 import org.web3j.crypto.Hash
 import org.web3j.crypto.Sign
 import org.web3j.utils.Numeric
@@ -21,10 +20,10 @@ import java.time.LocalDateTime
 @Service
 class AttestationService(
   private val attestationRepository: AttestationRepository,
+  private val abiEncoder: AbiEncoder,
   private val userDataRepository: UserDataRepository,
-  private val packerParametersEncoder: PackedParametersEncoder,
   private val tokenUriResolver: TokenUriResolver,
-  private val ecKeyPair: ECKeyPair,
+  private val credentials: Credentials,
   private val oracleUrlProperties: OracleUrlProperties
 ) {
 
@@ -44,7 +43,7 @@ class AttestationService(
           )
         )
       }
-      .flatMap { signAttestationData(it) }
+      .flatMap { signAttestationData(it, request) }
       .map {
         AttestationDataResponse(
           AttestationEntityDto(
@@ -62,19 +61,26 @@ class AttestationService(
       }
 
   @Transactional
-  fun signAttestationData(entity: AttestationEntity): Mono<AttestationEntity> =
-    packerParametersEncoder.encodeParameters(
-      listOf(
-        Bytes32(Numeric.hexStringToByteArray(entity.hashKeyArray)),
-        Utf8String(tokenUriResolver.resolveUri(entity)),
-        Bytes32(Numeric.hexStringToByteArray(entity.hashedData))
+  fun signAttestationData(
+    entity: AttestationEntity,
+    attestationData: AttestationDataDto
+  ): Mono<AttestationEntity> =
+    abiEncoder.encodeAttestationData(
+      EncodeAttestationDataRequest(
+        nftProvider = credentials.address,
+        hashKeyArray = entity.hashKeyArray,
+        tokenUri = tokenUriResolver.resolveUri(entity),
+        hashedData = entity.hashedData,
+        nftType = attestationData.nftType
       )
     )
-      .let { Hash.sha3(it) }
+      .let {
+        Hash.sha3("0x$it")
+      }
       .let { Numeric.hexStringToByteArray(it) }
       .let { hashForSign ->
         entity.copy(
-          signature = Sign.signPrefixedMessage(hashForSign, ecKeyPair)
+          signature = Sign.signPrefixedMessage(hashForSign, credentials.ecKeyPair)
             .let { sign -> SignatureHelper.toString(sign) }
         )
       }
