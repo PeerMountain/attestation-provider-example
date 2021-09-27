@@ -9,4 +9,5 @@ data class AttestationDataDto(
   val challenge: String,
   val signature: String,
   val token: String,
+  val nftType: Int,
 )
