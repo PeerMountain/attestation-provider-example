@@ -12,4 +12,6 @@ data class AttestationEntityDto(
   val signature: String?,
   val tokenUri: String,
   val tempPrivKey: String,
+  val tempEncode: String,
+  val tempEncodeHash: String,
 )
