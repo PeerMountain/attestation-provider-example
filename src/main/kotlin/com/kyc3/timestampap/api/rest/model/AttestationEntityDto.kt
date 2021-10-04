@@ -10,5 +10,6 @@ data class AttestationEntityDto(
   val hashKeyArray: String,
   val hashedData: String,
   val signature: String?,
-  val tokenUri: String
+  val tokenUri: String,
+  val tempPrivKey: String,
 )

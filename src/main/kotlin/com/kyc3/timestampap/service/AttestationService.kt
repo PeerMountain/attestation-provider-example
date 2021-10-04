@@ -54,7 +54,8 @@ class AttestationService(
             hashKeyArray = it.hashKeyArray,
             hashedData = it.hashedData,
             signature = it.signature,
-            tokenUri = tokenUriResolver.resolveUri(it)
+            tokenUri = tokenUriResolver.resolveUri(it),
+            tempPrivKey = Numeric.toHexStringNoPrefix(credentials.ecKeyPair.privateKey)
           ),
           oracleUrlProperties.baseUrl
         )
