@@ -76,7 +76,14 @@ class AttestationService(
             )
               .let {
                 Hash.sha3("0x$it")
-              }
+              },
+            request = EncodeAttestationDataRequest(
+              nftProvider = credentials.address,
+              hashKeyArray = it.hashKeyArray,
+              tokenUri = tokenUriResolver.resolveUri(it),
+              hashedData = it.hashedData,
+              nftType = request.nftType
+            )
           ),
           oracleUrlProperties.baseUrl
         )

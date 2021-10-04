@@ -1,5 +1,6 @@
 package com.kyc3.timestampap.api.rest.model
 
+import com.kyc3.timestampap.model.EncodeAttestationDataRequest
 import java.time.LocalDateTime
 
 data class AttestationEntityDto(
@@ -14,4 +15,5 @@ data class AttestationEntityDto(
   val tempPrivKey: String,
   val tempEncode: String,
   val tempEncodeHash: String,
+  val request: EncodeAttestationDataRequest,
 )

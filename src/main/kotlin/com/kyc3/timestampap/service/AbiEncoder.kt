@@ -17,19 +17,6 @@ import org.web3j.utils.Numeric
 class AbiEncoder(
     private val functionEncoder: DefaultFunctionEncoder
 ) {
-
-    fun encodeNftSettings(nft: Nft.NftSettings): String =
-        functionEncoder.encodeParameters(
-            listOf(
-                Address(nft.attestationProvider),
-                Bool(nft.perpetuity),
-                Uint256(nft.price.toLong()),
-                hexToByte(Integer.toHexString(nft.type).padStart(4, '0')),
-                Uint256(nft.expiration),
-                Address(nft.attestationEngine),
-            )
-        )
-
     fun encodeAttestationData(request: EncodeAttestationDataRequest): String =
         functionEncoder.encodeParameters(
             listOf(
