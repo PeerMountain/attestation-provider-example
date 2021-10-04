@@ -26,7 +26,7 @@ oracle:
     base_url: ${ORACLE_REDIRECT_URL:http://localhost:4200}/nft/purchase-complete
 
 wallet:
-  privateKey: ${ACCOUNT_PRIVATE_KEY:e5cdf22794357fa5e03e4c92bb1a71c52817669fb6eb60663d8d341e0fdb8a03}
+  privateKey: e5cdf22794357fa5e03e4c92bb1a71c52817669fb6eb60663d8d341e0fdb8a03
 
 logging:
   level:
