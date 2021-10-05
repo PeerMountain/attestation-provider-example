@@ -55,35 +55,6 @@ class AttestationService(
             hashedData = it.hashedData,
             signature = it.signature,
             tokenUri = tokenUriResolver.resolveUri(it),
-            tempPrivKey = Numeric.toHexStringNoPrefix(credentials.ecKeyPair.privateKey),
-            tempEncode = abiEncoder.encodeAttestationData(
-              EncodeAttestationDataRequest(
-                nftProvider = credentials.address,
-                hashKeyArray = it.hashKeyArray,
-                tokenUri = tokenUriResolver.resolveUri(it),
-                hashedData = it.hashedData,
-                nftType = request.nftType
-              )
-            ),
-            tempEncodeHash = abiEncoder.encodeAttestationData(
-              EncodeAttestationDataRequest(
-                nftProvider = credentials.address,
-                hashKeyArray = it.hashKeyArray,
-                tokenUri = tokenUriResolver.resolveUri(it),
-                hashedData = it.hashedData,
-                nftType = request.nftType
-              )
-            )
-              .let {
-                Hash.sha3("0x$it")
-              },
-            request = EncodeAttestationDataRequest(
-              nftProvider = credentials.address,
-              hashKeyArray = it.hashKeyArray,
-              tokenUri = tokenUriResolver.resolveUri(it),
-              hashedData = it.hashedData,
-              nftType = request.nftType
-            )
           ),
           oracleUrlProperties.baseUrl
         )
