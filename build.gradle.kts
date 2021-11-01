@@ -17,6 +17,14 @@ repositories {
   mavenCentral()
 }
 
+sourceSets {
+  main {
+    java {
+      srcDir("build/generated/source/java/main")
+    }
+  }
+}
+
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
   implementation("org.springframework.boot:spring-boot-starter-webflux")
@@ -27,10 +35,18 @@ dependencies {
 
   implementation("org.flywaydb:flyway-core")
 
-  implementation("org.igniterealtime.smack:smack-tcp:4.3.5")
-  implementation("org.igniterealtime.smack:smack-im:4.3.5")
-  implementation("org.igniterealtime.smack:smack-extensions:4.3.5")
-  implementation("org.igniterealtime.smack:smack-java7:4.3.5")
+  implementation("org.igniterealtime.smack:smack-tcp:4.5.0-alpha1-SNAPSHOT")
+  implementation("org.igniterealtime.smack:smack-core:4.5.0-alpha1-SNAPSHOT")
+  implementation("org.igniterealtime.smack:smack-im:4.5.0-alpha1-SNAPSHOT")
+  implementation("org.igniterealtime.smack:smack-extensions:4.5.0-alpha1-SNAPSHOT")
+  implementation("org.igniterealtime.smack:smack-java7:4.5.0-alpha1-SNAPSHOT")
+  implementation("org.igniterealtime.smack:smack-experimental:4.5.0-alpha1-SNAPSHOT")
+  implementation("org.igniterealtime.smack:smack-bosh:4.5.0-alpha1-SNAPSHOT")
+  implementation("org.igniterealtime.smack:smack-xmlparser-xpp3:4.5.0-alpha1-SNAPSHOT")
+  implementation("org.igniterealtime.smack:smack-xmlparser-stax:4.5.0-alpha1-SNAPSHOT")
+  implementation("org.igniterealtime.smack:smack-streammanagement:4.5.0-alpha1-SNAPSHOT")
+  implementation("org.igniterealtime.smack:smack-websocket:4.5.0-alpha1-SNAPSHOT")
+  implementation("org.igniterealtime.smack:smack-websocket-okhttp:4.5.0-alpha1-SNAPSHOT")
 
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -39,12 +55,13 @@ dependencies {
   implementation("org.springframework:spring-jdbc")
 
   implementation("org.web3j:core:5.0.0")
+  implementation("com.squareup.okhttp3:okhttp:4.9.1")
 
   implementation("org.apache.commons:commons-lang3:3.12.0")
 
   implementation("org.hibernate.validator:hibernate-validator:7.0.1.Final")
 
-  implementation("com.kyc3:oracle-definitions:4385f93")
+  implementation("com.kyc3:oracle-definitions:1a86bb7")
   implementation("org.ehcache:ehcache:3.1.3")
 
   runtimeOnly("io.r2dbc:r2dbc-postgresql")

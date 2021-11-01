@@ -36,7 +36,7 @@ server:
   port: 8081
 
 web3:
-  host: ${WEB3_HOST:http://localhost:8545}
+  host: ${WEB3_HOST:https://public-node.testnet.rsk.co}
 
 libsodium:
   path: ${LIBSODIUM_PATH:/usr/lib/libsodium.so}

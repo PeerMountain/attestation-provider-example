@@ -25,7 +25,7 @@ class EncryptedMessageFlow(
     doIfValid(from.asEntityBareJidString(), signedMessage) { signed ->
       apiRouter.route(signed, chat)
     }
-      .subscribe { oracleAPIResponse.responseToClient(signedMessage.publicKey, chat, it) }
+      .subscribe { oracleAPIResponse.responseToClient(chat, it) }
   }
 
   fun doIfValid(

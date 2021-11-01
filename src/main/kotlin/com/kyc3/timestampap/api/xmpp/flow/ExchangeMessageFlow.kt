@@ -7,6 +7,7 @@ import com.kyc3.timestampap.config.properties.XmppProperties
 import com.kyc3.timestampap.model.LibsodiumPublicKey
 import com.kyc3.timestampap.model.UserKeys
 import com.kyc3.timestampap.service.ExchangeKeysHolder
+import com.kyc3.timestampap.service.OracleService
 import com.kyc3.timestampap.service.UserKeysService
 import org.jivesoftware.smack.chat2.Chat
 import org.jxmpp.jid.EntityBareJid
@@ -19,7 +20,8 @@ import org.web3j.utils.Numeric
 class ExchangeMessageFlow(
   private val apiResponse: OracleAPIResponse,
   private val userKeysService: UserKeysService,
-  private val exchangeKeysHolder: ExchangeKeysHolder
+  private val exchangeKeysHolder: ExchangeKeysHolder,
+  private val oracleService: OracleService
 ) {
 
   fun exchange(from: EntityBareJid, chat: Chat, exchange: Exchange.ExchangeKeysRequest) {
@@ -32,9 +34,9 @@ class ExchangeMessageFlow(
       )
     )
     apiResponse.responseToClient(
-      exchange.publicEncryptionKey,
       chat,
       exchangeKeysHolder.generateExchangeMessageResponse()
     )
+    oracleService.requestAttestationProviderData()
   }
 }

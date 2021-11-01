@@ -1,35 +1,54 @@
 package com.kyc3.timestampap.config
 
 import com.kyc3.timestampap.config.properties.XmppProperties
+import org.jivesoftware.smack.XMPPConnection
+import org.jivesoftware.smack.c2s.ModularXmppClientToServerConnection
+import org.jivesoftware.smack.c2s.ModularXmppClientToServerConnectionConfiguration
 import org.jivesoftware.smack.chat2.ChatManager
-import org.jivesoftware.smack.tcp.XMPPTCPConnection
-import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration
+import org.jivesoftware.smack.websocket.XmppWebSocketTransportModuleDescriptor
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.web3j.crypto.Credentials
 
 @Configuration
 class XMPPConfiguration(
-  val xmppProperties: XmppProperties
+  val xmppProperties: XmppProperties,
 ) {
 
   @Bean
-  fun xmppTcpConnectionConfiguration(): XMPPTCPConnectionConfiguration =
-    XMPPTCPConnectionConfiguration.builder()
+  fun connectionConfiguration(
+    credentials: Credentials
+  ): ModularXmppClientToServerConnectionConfiguration =
+    ModularXmppClientToServerConnectionConfiguration.builder()
+      .also {
+        it.removeAllModules()
+      }
       .setXmppDomain(xmppProperties.domain)
-      .setUsernameAndPassword(xmppProperties.userName, xmppProperties.password)
+      .setUsernameAndPassword(credentials.address, xmppProperties.password)
       .setHost(xmppProperties.host)
-      .setConnectTimeout(50_000)
+      .also {
+        it.addModule(
+          XmppWebSocketTransportModuleDescriptor.getBuilder(
+            it
+          )
+            .explicitlySetWebSocketEndpoint("wss://xmpp.kyc3.com/xmpp-websocket")
+            .build()
+        )
+      }
       .build()
 
   @Bean
-  fun xmppTcpConnection(xmpptcpConnectionConfiguration: XMPPTCPConnectionConfiguration): XMPPTCPConnection =
-    XMPPTCPConnection(xmpptcpConnectionConfiguration)
+  fun connection(
+    connectionConfiguration: ModularXmppClientToServerConnectionConfiguration
+  ): XMPPConnection =
+    ModularXmppClientToServerConnection(connectionConfiguration)
       .also {
         it.connect()
         it.login()
       }
 
   @Bean
-  fun chatManager(xmpptcpConnection: XMPPTCPConnection): ChatManager =
-    ChatManager.getInstanceFor(xmpptcpConnection)
+  fun chatManager(connection: XMPPConnection): ChatManager =
+    ChatManager.getInstanceFor(connection)
+
 }
