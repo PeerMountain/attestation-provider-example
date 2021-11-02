@@ -90,3 +90,7 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
   useJUnitPlatform()
 }
+
+task<Exec>("generateWeb3J") {
+  commandLine("sh", "utils/generate.sh")
+}
