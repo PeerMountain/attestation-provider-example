@@ -31,7 +31,6 @@ build_builder:
 #      changes:
 #        - Dockerfile.builder
 
-
 compile:
   stage: compile
   image:
