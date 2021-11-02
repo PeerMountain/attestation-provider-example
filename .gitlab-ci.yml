@@ -28,8 +28,8 @@ build_builder:
       --destination=$CI_REGISTRY_IMAGE/builder:latest
 #  rules:
 #    - if: $CI_COMMIT_BRANCH == 'master'
-      changes:
-        - Dockerfile.builder
+#      changes:
+#        - Dockerfile.builder
 
 
 compile:
