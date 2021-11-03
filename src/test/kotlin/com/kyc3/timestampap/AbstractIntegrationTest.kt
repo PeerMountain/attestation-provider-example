@@ -1,11 +1,16 @@
 package com.kyc3.timestampap
 
+import com.kyc3.timestampap.config.TestXMPPConfiguration
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.annotation.Import
+import org.springframework.test.context.ActiveProfiles
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.utility.DockerImageName
 import java.net.URI
 
 @SpringBootTest
+@Import(TestXMPPConfiguration::class)
+@ActiveProfiles("test")
 abstract class AbstractIntegrationTest {
 
   companion object {
@@ -28,8 +33,6 @@ abstract class AbstractIntegrationTest {
       System.setProperty("spring.datasource.url", postges.jdbcUrl)
       System.setProperty("spring.datasource.username", postges.username)
       System.setProperty("spring.datasource.password", postges.password)
-
-
     }
   }
 

@@ -8,9 +8,11 @@ import org.jivesoftware.smack.chat2.ChatManager
 import org.jivesoftware.smack.websocket.XmppWebSocketTransportModuleDescriptor
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Profile
 import org.web3j.crypto.Credentials
 
 @Configuration
+@Profile("!test")
 class XMPPConfiguration(
   val xmppProperties: XmppProperties,
 ) {

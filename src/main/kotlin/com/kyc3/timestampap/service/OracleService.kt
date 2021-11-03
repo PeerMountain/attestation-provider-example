@@ -35,14 +35,14 @@ class OracleService(
 ) {
 
     private val oracleJid: EntityBareJid = JidCreate.entityBareFrom(
-        "${Constants.ORACLE_ADDRESS}@xmpp.kyc3.com"
+        "$ORACLE_ADDRESS@xmpp.kyc3.com"
     )
 
     private val oracleChat: Chat = chatManager.chatWith(oracleJid)
 
     fun requestAttestationProviderData() {
         val userKeys = userKeysService.getUserKeys(
-            "${Constants.ORACLE_ADDRESS}@xmpp.kyc3.com"
+            "$ORACLE_ADDRESS@xmpp.kyc3.com"
         )
 
         if (userKeys != null) {
