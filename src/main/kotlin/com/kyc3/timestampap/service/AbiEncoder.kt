@@ -1,12 +1,11 @@
 package com.kyc3.timestampap.service
 
-import com.kyc3.oracle.nft.Nft
 import com.kyc3.timestampap.model.EncodeAttestationDataRequest
+import com.kyc3.timestampap.repository.entity.NftSettingsEntity
 import org.springframework.stereotype.Service
 import org.web3j.abi.DefaultFunctionEncoder
 import org.web3j.abi.datatypes.Address
 import org.web3j.abi.datatypes.Bool
-import org.web3j.abi.datatypes.DynamicBytes
 import org.web3j.abi.datatypes.Utf8String
 import org.web3j.abi.datatypes.generated.Bytes2
 import org.web3j.abi.datatypes.generated.Bytes32
@@ -49,4 +48,20 @@ class AbiEncoder(
         require(digit != -1) { "Invalid Hexadecimal Character: $hexChar" }
         return digit
     }
+
+    fun encodeNftSettings(
+        settingsEntity: NftSettingsEntity,
+        attestationProvider: String,
+        attestationEngine: String
+    ): String =
+        functionEncoder.encodeParameters(
+            listOf(
+                Address(attestationProvider),
+                Bool(settingsEntity.perpetuity),
+                Uint256(settingsEntity.price.toLong()),
+                hexToByte(Integer.toHexString(settingsEntity.nftType).padStart(4, '0')),
+                Uint256(settingsEntity.expiration),
+                Address(attestationEngine),
+            )
+        )
 }

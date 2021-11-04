@@ -1,0 +1,2 @@
+/root/.web3j/web3j generate solidity -a src/main/resources/contracts/ERC20.json -o build/generated/source/java/main -p com.kyc3
+/root/.web3j/web3j generate solidity -a src/main/resources/contracts/CashierContractV3.json -o build/generated/source/java/main -p com.kyc3

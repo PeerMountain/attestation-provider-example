@@ -21,6 +21,7 @@ class VerifyChallengeListener(
         challengeVerificationService.verifyAndGenerateUrl(it)
           .map { url ->
             VerifyChallenge.VerifyChallengeResponse.newBuilder()
+              .setUserAddress(it.userAddress)
               .setUserPublicKey(it.userPublicKey)
               .setRedirectUrl(url)
               .build()

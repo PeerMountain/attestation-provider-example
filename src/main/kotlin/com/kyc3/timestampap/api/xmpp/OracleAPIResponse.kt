@@ -18,8 +18,7 @@ import java.util.*
 @Service
 class OracleAPIResponse(
   private val base64Encoder: Base64.Encoder,
-  private val ecKeyPair: ECKeyPair,
-  private val web3JService: Web3JService,
+  private val web3Service: Web3JService,
   private val encryptionService: EncryptionService,
   private val userKeysService: UserKeysService,
 ) {
@@ -27,13 +26,17 @@ class OracleAPIResponse(
   fun responseDirectly(chat: Chat, message: GeneratedMessageV3) =
     chat.send(encodeMessage(message))
 
-  fun responseToClient(publicKey: String, chat: Chat, message: GeneratedMessageV3) =
+  fun responseToClient(chat: Chat, message: GeneratedMessageV3): Unit? =
     Any.pack(message)
       .let {
-        Message.SignedMessage.newBuilder()
+        Message.SignedAddressedMessage.newBuilder()
           .setMessage(it)
-          .setAddress(Keys.getAddress(ecKeyPair))
-          .setSignature(SignatureHelper.toString(web3JService.sign(encodeMessage(it))))
+          .setSignature(SignatureHelper.toString(web3Service.sign(encodeMessage(it))))
+          .build()
+      }
+      .let {
+        Message.SignedMessage.newBuilder()
+          .setAddressed(it)
           .build()
       }
       .toByteArray()
