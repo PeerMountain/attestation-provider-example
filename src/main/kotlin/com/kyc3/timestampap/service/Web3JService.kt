@@ -10,7 +10,6 @@ import org.web3j.utils.Numeric
 
 @Service
 class Web3JService(
-  private val web3j: Web3j,
   private val ecKeyPair: ECKeyPair
 ) {
 
@@ -27,5 +26,8 @@ class Web3JService(
 
   fun sign(body: String): Sign.SignatureData =
     Sign.signPrefixedMessage(Numeric.hexStringToByteArray(Hash.sha3String(body)), ecKeyPair)
+
+  fun signHex(body: String): Sign.SignatureData =
+    Sign.signPrefixedMessage(Numeric.hexStringToByteArray(Hash.sha3(body)), ecKeyPair)
 
 }

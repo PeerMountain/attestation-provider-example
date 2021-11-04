@@ -96,7 +96,7 @@ class OracleService(
 
     fun createNft(settings: NftSettingsEntity) {
         abiEncoder.encodeNftSettings(settings, credentials.address, ORACLE_ADDRESS)
-            .let { web3JService.sign(it) }
+            .let { web3JService.signHex(it) }
             .let { SignatureHelper.toString(it) }
             .let {
                 CreateNft.CreateNftRequest.newBuilder()
