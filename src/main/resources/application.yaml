@@ -13,10 +13,9 @@ datasource:
   database: ${DATASOURCE_DATABASE:tap}
 
 xmpp:
-  domain: ${XMPP_DOMAIN:jabber.hot-chilli.net}
-  userName: ${XMPP_USERNAME:timestamp-ap}
-  password: ${XMPP_PASSWORD:timestamp-ap}
-  host: ${XMPP_HOST:jabber.hot-chilli.net}
+  domain: ${XMPP_DOMAIN:xmpp.kyc3.com}
+  password: ${XMPP_PASSWORD:tap}
+  host: ${XMPP_HOST:xmpp.kyc3.com}
 
 attestation:
   redirect:
