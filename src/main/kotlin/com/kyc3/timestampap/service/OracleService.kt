@@ -1,6 +1,6 @@
 package com.kyc3.timestampap.service
 
-import com.kyc3.ERC20
+import com.kyc3.DummyERC20
 import com.kyc3.Message
 import com.kyc3.oracle.ap.AttestationProviderOuterClass
 import com.kyc3.oracle.ap.CreateNft

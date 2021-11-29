@@ -22,11 +22,7 @@ class RegistrationService(
     }
 
     fun register(account: String) {
-        if (erc20ContractService.requestBalance(account) <= BigInteger.ZERO) {
-            erc20ContractService.mint(account, BigInteger.valueOf(10000000000000000))
-        }
-        erc20ContractService.allowance(credentials.address, CASHIER_CONTRACT_ADDRESS)
-        if (cashierContractService.requestTreasuryBalance(account) <= BigInteger.ZERO) {
+        if (erc20ContractService.allowance(credentials.address, CASHIER_CONTRACT_ADDRESS) <= BigInteger.ZERO) {
             erc20ContractService.approve(CASHIER_CONTRACT_ADDRESS, BigInteger.valueOf(1000000))
         }
         val receipt = cashierContractService.depositTreasuryAccount(BigInteger.valueOf(6000))
