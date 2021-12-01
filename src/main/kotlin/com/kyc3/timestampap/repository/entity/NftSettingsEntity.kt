@@ -8,7 +8,6 @@ data class NftSettingsEntity(
     @Id
     val id: Long,
     val nftType: Int,
-    val perpetuity: Boolean,
     val price: Int,
     val expiration: Long,
 )

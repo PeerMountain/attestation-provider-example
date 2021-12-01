@@ -26,7 +26,7 @@ class ExchangeKeysHolder(
 
   fun generateExchangeMessageResponse(): Exchange.ExchangeKeysResponse =
     Exchange.ExchangeKeysResponse.newBuilder()
-      .setUsername(xmppProperties.userName)
+      .setUsername(credentials.address)
       .setAddress(credentials.address)
       .setPublicKey(Numeric.toHexStringNoPrefix(ecKeyPair.publicKey))
       .setPublicEncryptionKey(libsodiumPublicKey.publicKey)

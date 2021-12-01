@@ -1,6 +1,6 @@
 package com.kyc3.timestampap.config
 
-import com.kyc3.timestampap.Constants
+import com.kyc3.timestampap.config.properties.OracleProperties
 import org.jivesoftware.smack.XMPPConnection
 import org.jivesoftware.smack.c2s.ModularXmppClientToServerConnectionConfiguration
 import org.jivesoftware.smack.chat2.Chat
@@ -13,7 +13,9 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Primary
 
 @TestConfiguration
-class TestXMPPConfiguration {
+class TestXMPPConfiguration(
+    private val oracleProperties: OracleProperties
+) {
 
     @Bean
     @Primary
@@ -32,7 +34,7 @@ class TestXMPPConfiguration {
                 `when`(
                     it.chatWith(
                         JidCreate.entityBareFrom(
-                            "${Constants.ORACLE_ADDRESS}@xmpp.kyc3.com"
+                            "${oracleProperties.address}@xmpp.kyc3.com"
                         )
                     )
                 )

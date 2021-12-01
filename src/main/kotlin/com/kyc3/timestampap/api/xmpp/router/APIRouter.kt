@@ -27,6 +27,7 @@ class APIRouter(
                       "type=${message.addressed.message.typeUrl}")
                 }
               }
+              ?.also { log.info("process='OracleRouter.route' type='${it.type()}'") }
               ?.let { Pair(it, message) }
           )
             .flatMap {

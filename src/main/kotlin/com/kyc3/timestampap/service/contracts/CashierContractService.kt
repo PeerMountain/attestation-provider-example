@@ -18,11 +18,4 @@ class CashierContractService(
             .also {
                 log.info("process=CashierContractV3:requestTreasuryBalance account=$account balance=$it")
             }
-
-    fun depositTreasuryAccount(amount: BigInteger): TransactionReceipt =
-        cashierContractV2.deposit(amount)
-            .send()
-            .also {
-                log.info("process=CashierContractV3:depositTreasuryAccount amount=$amount receipt=$it")
-            }
 }

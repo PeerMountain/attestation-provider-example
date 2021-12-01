@@ -38,6 +38,6 @@ class Erc20ContractService(
         erc20.approve(cashierAddress, amount)
             .send()
             .also {
-                log.info("process=erc20:mint cashierAddress=$cashierAddress amount=$amount receipt=$it")
+                log.info("process=erc20:approve cashierAddress=$cashierAddress amount=$amount receipt=$it")
             }
 }

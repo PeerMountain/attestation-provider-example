@@ -4,9 +4,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.stereotype.Component
 
 @Component
-@ConfigurationProperties(prefix = "xmpp")
-class XmppProperties {
-  lateinit var domain: String
-  lateinit var password: String
-  lateinit var host: String
+@ConfigurationProperties("contracts")
+class ContractsProperties {
+    lateinit var cashier: String
+    lateinit var trustToken: String
+    lateinit var erc20: String
 }
