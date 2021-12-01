@@ -183,36 +183,10 @@
     "type": "event"
   },
   {
-    "inputs": [],
-    "name": "_erc20_contract",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "_trust_contract",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",
-        "name": "acc",
+        "name": "add",
         "type": "address"
       }
     ],
@@ -228,21 +202,169 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "cashierPercentage",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "amount",
+        "name": "pow",
         "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "customer",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "message",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bytes",
+        "name": "signature",
+        "type": "bytes"
       }
     ],
     "name": "deposit",
     "outputs": [],
-    "stateMutability": "payable",
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "enginePercentage",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "add",
+        "type": "address"
+      }
+    ],
+    "name": "getLastNonce",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getProofOfWork",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "lastNonce",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "nonce",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "customer",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "message",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bytes",
+        "name": "signature",
+        "type": "bytes"
+      }
+    ],
+    "name": "nftMint",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "pow",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "customer",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "message",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bytes",
+        "name": "signature",
+        "type": "bytes"
+      }
+    ],
+    "name": "nftTransfer",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -263,8 +385,18 @@
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "pow",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "customer",
+        "type": "address"
+      },
+      {
         "internalType": "bytes",
-        "name": "data",
+        "name": "message",
         "type": "bytes"
       },
       {
@@ -279,36 +411,29 @@
     "type": "function"
   },
   {
-    "inputs": [
+    "inputs": [],
+    "name": "pmtnContract",
+    "outputs": [
       {
         "internalType": "address",
-        "name": "nftOwner",
+        "name": "",
         "type": "address"
-      },
-      {
-        "internalType": "bytes",
-        "name": "attestationEngineData",
-        "type": "bytes"
-      },
-      {
-        "internalType": "bytes",
-        "name": "attestationEngineDataSigned",
-        "type": "bytes"
-      },
-      {
-        "internalType": "bytes",
-        "name": "attestationData",
-        "type": "bytes"
-      },
-      {
-        "internalType": "bytes",
-        "name": "attestationDataSigned",
-        "type": "bytes"
       }
     ],
-    "name": "purchase",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "pmtnDecimals",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -345,12 +470,64 @@
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "setCashierPercentage",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "erc20_contract",
         "type": "address"
       }
     ],
     "name": "setERC20TokenAddress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "setEnginePercentage",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "proof",
+        "type": "uint256"
+      }
+    ],
+    "name": "setLeadingZeros",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "decimals",
+        "type": "uint256"
+      }
+    ],
+    "name": "setPMTNDecimals",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -392,40 +569,11 @@
         "internalType": "bool",
         "name": "",
         "type": "bool"
-      }
-    ],
-    "stateMutability": "pure",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes",
-        "name": "data",
-        "type": "bytes"
       },
-      {
-        "internalType": "bytes",
-        "name": "signature",
-        "type": "bytes"
-      }
-    ],
-    "name": "splitAttestationEngineData",
-    "outputs": [
       {
         "internalType": "address",
-        "name": "ae",
+        "name": "",
         "type": "address"
-      },
-      {
-        "internalType": "bytes",
-        "name": "nft_settings",
-        "type": "bytes"
-      },
-      {
-        "internalType": "bytes",
-        "name": "nft_settings_signed",
-        "type": "bytes"
       }
     ],
     "stateMutability": "pure",
@@ -448,17 +596,12 @@
     "outputs": [
       {
         "internalType": "address",
-        "name": "provider",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "engine",
+        "name": "",
         "type": "address"
       },
       {
         "internalType": "uint256",
-        "name": "nftPrice",
+        "name": "",
         "type": "uint256"
       }
     ],
@@ -497,14 +640,24 @@
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "pow",
+        "type": "uint256"
+      },
+      {
         "internalType": "address",
-        "name": "recipient",
+        "name": "customer",
         "type": "address"
       },
       {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
+        "internalType": "bytes",
+        "name": "message",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bytes",
+        "name": "signature",
+        "type": "bytes"
       }
     ],
     "name": "transfer",
@@ -523,6 +676,19 @@
     "name": "transferOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "trustContract",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -559,22 +725,12 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "attestationEngine",
-        "type": "address"
-      },
-      {
-        "internalType": "bytes",
-        "name": "data",
-        "type": "bytes"
-      },
-      {
-        "internalType": "bytes",
-        "name": "signature",
-        "type": "bytes"
+        "internalType": "uint256",
+        "name": "nonce",
+        "type": "uint256"
       }
     ],
-    "name": "verifyAttestationEngineData",
+    "name": "verifyPoW",
     "outputs": [
       {
         "internalType": "bool",
@@ -582,14 +738,14 @@
         "type": "bool"
       }
     ],
-    "stateMutability": "pure",
+    "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
       {
         "internalType": "bytes",
-        "name": "attestationData",
+        "name": "messageToHash",
         "type": "bytes"
       },
       {
@@ -603,65 +759,7 @@
         "type": "address"
       }
     ],
-    "name": "verifyEncodedAttestationData",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "pure",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes",
-        "name": "nftSettings",
-        "type": "bytes"
-      },
-      {
-        "internalType": "bytes",
-        "name": "nftSettingsSigned",
-        "type": "bytes"
-      },
-      {
-        "internalType": "address",
-        "name": "provider",
-        "type": "address"
-      }
-    ],
-    "name": "verifyEncodedNftSettings",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "pure",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes",
-        "name": "data",
-        "type": "bytes"
-      },
-      {
-        "internalType": "bytes",
-        "name": "signature",
-        "type": "bytes"
-      },
-      {
-        "internalType": "address",
-        "name": "receiver",
-        "type": "address"
-      }
-    ],
-    "name": "verifyPaymentDataSignature",
+    "name": "verifySignature",
     "outputs": [
       {
         "internalType": "bool",
@@ -676,13 +774,28 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "amount",
+        "name": "pow",
         "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "customer",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "message",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bytes",
+        "name": "signature",
+        "type": "bytes"
       }
     ],
     "name": "withdraw",
     "outputs": [],
-    "stateMutability": "payable",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {

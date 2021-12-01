@@ -1,6 +1,6 @@
 package com.kyc3.timestampap.service.contracts
 
-import com.kyc3.ERC20
+import com.kyc3.DummyERC20
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import org.web3j.protocol.core.methods.response.TransactionReceipt
@@ -8,7 +8,7 @@ import java.math.BigInteger
 
 @Service
 class Erc20ContractService(
-    private val erc20: ERC20
+    private val erc20: DummyERC20
 ) {
 
     private val log = LoggerFactory.getLogger(javaClass)
@@ -38,6 +38,6 @@ class Erc20ContractService(
         erc20.approve(cashierAddress, amount)
             .send()
             .also {
-                log.info("process=erc20:mint cashierAddress=$cashierAddress amount=$amount receipt=$it")
+                log.info("process=erc20:approve cashierAddress=$cashierAddress amount=$amount receipt=$it")
             }
 }

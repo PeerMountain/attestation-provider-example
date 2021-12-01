@@ -21,6 +21,7 @@ attestation:
   redirect:
     base_url: ${ATTESTATION_REDIRECT_URL:http://localhost:4201}/attestation
 oracle:
+  address: ${ORACLE_ADDRESS:0x24eb69030be50c01f3952fed03bbd36c33e25429}
   redirect:
     base_url: ${ORACLE_REDIRECT_URL:http://localhost:4200}/nft/purchase-complete
 
@@ -39,3 +40,8 @@ web3:
 
 libsodium:
   path: ${LIBSODIUM_PATH:/usr/lib/libsodium.so}
+
+contracts:
+  cashier: ${CASHIER_CONTRACT_ADDRESS:0xd1A01ccF70Cd5Be98f3DFEB36e8d943260f161db}
+  trust-token: ${TRUST_TOKEN_ADDRESS:0xBe0F2b96f53744c28a61FFB9E87A4989bAf77a12}
+  erc20: ${ERC20_ADDRESS:0xA966BF3CecD850371753FDDfD293BD97F4644A01}
