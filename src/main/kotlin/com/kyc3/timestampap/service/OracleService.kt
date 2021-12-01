@@ -85,7 +85,6 @@ class OracleService(
                             .setPrice(settings.price)
                             .setExpiration(settings.expiration)
                             .setAttestationProvider(credentials.address)
-                            .setAttestationEngine(oracleProperties.address)
                             .setSignedMessage(it)
                     )
                     .build()
