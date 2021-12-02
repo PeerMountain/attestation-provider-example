@@ -7,5 +7,5 @@ import kotlin.random.Random
 class NonceService {
 
     fun nextNonce(): Long =
-        Random.nextLong()
+        Random.nextLong(100_000_000)
 }
