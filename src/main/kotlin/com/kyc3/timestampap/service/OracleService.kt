@@ -28,7 +28,8 @@ class OracleService(
     private val web3JService: Web3JService,
     private val abiEncoder: AbiEncoder,
     private val contractsProperties: ContractsProperties,
-    private val oracleProperties: OracleProperties
+    private val oracleProperties: OracleProperties,
+    private val nonceService: NonceService,
 ) {
 
     private val oracleJid: EntityBareJid = JidCreate.entityBareFrom(
@@ -95,7 +96,7 @@ class OracleService(
     fun depositRequest(depositAmount: Long) =
         abiEncoder.encodeDeposit(
             depositAmount,
-            0,
+            nonceService.nextNonce(),
             contractsProperties.cashier
         )
             .let { encoded ->
