@@ -64,7 +64,6 @@ class OracleService(
 
     fun requestNftSettingsList() {
         ListNft.ListNftRequest.newBuilder()
-            .setApAddress(credentials.address)
             .build()
             .let {
                 apiResponse.responseToClient(
@@ -87,6 +86,9 @@ class OracleService(
                             .setExpiration(settings.expiration)
                             .setAttestationProvider(credentials.address)
                             .setSignedMessage(it)
+                            .setName(settings.name)
+                            .setDescription(settings.description)
+                            .setImageUrl(settings.imageUrl)
                     )
                     .build()
             }
