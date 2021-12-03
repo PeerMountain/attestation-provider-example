@@ -10,4 +10,7 @@ data class NftSettingsEntity(
     val nftType: Int,
     val price: Int,
     val expiration: Long,
+    val name: String,
+    val description: String,
+    val imageUrl: String,
 )
