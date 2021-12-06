@@ -29,7 +29,8 @@ class AttestationService(
     private val tokenUriResolver: TokenUriResolver,
     private val credentials: Credentials,
     private val oracleUrlProperties: OracleUrlProperties,
-    private val nftMintService: NftMintService
+    private val nftMintService: NftMintService,
+    private val nonceService: NonceService
 ) {
 
     @Transactional
@@ -69,7 +70,7 @@ class AttestationService(
                     .subscribe {
                         nftMintService.nftMint(
                             request.userAddress,
-                            0,
+                            nonceService.nextNonce(),
                             it,
                             attestationDataResponse.entity
                         )
