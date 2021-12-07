@@ -1,10 +1,9 @@
 package com.kyc3.timestampap.service
 
-import com.kyc3.timestampap.Constants
-import com.kyc3.timestampap.Constants.Companion.ORACLE_ADDRESS
 import com.kyc3.timestampap.api.rest.model.AttestationDataDto
 import com.kyc3.timestampap.api.rest.model.AttestationDataResponse
 import com.kyc3.timestampap.api.rest.model.AttestationEntityDto
+import com.kyc3.timestampap.config.properties.OracleProperties
 import com.kyc3.timestampap.config.properties.OracleUrlProperties
 import com.kyc3.timestampap.model.EncodeAttestationDataRequest
 import com.kyc3.timestampap.repository.AttestationRepository
@@ -30,7 +29,8 @@ class AttestationService(
     private val credentials: Credentials,
     private val oracleUrlProperties: OracleUrlProperties,
     private val nftMintService: NftMintService,
-    private val nonceService: NonceService
+    private val nonceService: NonceService,
+    private val oracleProperties: OracleProperties
 ) {
 
     @Transactional
@@ -86,7 +86,7 @@ class AttestationService(
         abiEncoder.encodeAttestationData(
             EncodeAttestationDataRequest(
                 nftProvider = credentials.address,
-                attestationEngine = ORACLE_ADDRESS,
+                attestationEngine = oracleProperties.address,
                 hashKeyArray = entity.hashKeyArray,
                 tokenUri = tokenUriResolver.resolveUri(entity),
                 hashedData = entity.hashedData,

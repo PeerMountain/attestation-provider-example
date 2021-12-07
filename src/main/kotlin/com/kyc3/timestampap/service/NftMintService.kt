@@ -1,7 +1,7 @@
 package com.kyc3.timestampap.service
 
-import com.kyc3.timestampap.Constants.Companion.ORACLE_ADDRESS
 import com.kyc3.timestampap.api.rest.model.AttestationEntityDto
+import com.kyc3.timestampap.config.properties.OracleProperties
 import com.kyc3.timestampap.model.EncodeAttestationDataRequest
 import com.kyc3.timestampap.repository.entity.NftSettingsEntity
 import org.springframework.stereotype.Service
@@ -13,7 +13,8 @@ class NftMintService(
     private val credentials: Credentials,
     private val web3JService: Web3JService,
     private val uriResolver: TokenUriResolver,
-    private val oracleService: OracleService
+    private val oracleService: OracleService,
+    private val oracleProperties: OracleProperties,
 ) {
 
     fun nftMint(
@@ -29,7 +30,7 @@ class NftMintService(
         val encodeAttestationData = abiEncoder.encodeAttestationData(
             EncodeAttestationDataRequest(
                 credentials.address,
-                ORACLE_ADDRESS,
+                oracleProperties.address,
                 attestationEntity.hashKeyArray,
                 uriResolver.resolveUri(attestationEntity),
                 attestationEntity.hashedData,
