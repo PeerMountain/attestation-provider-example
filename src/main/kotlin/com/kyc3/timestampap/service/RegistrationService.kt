@@ -2,6 +2,7 @@ package com.kyc3.timestampap.service
 
 import com.kyc3.timestampap.config.properties.ContractsProperties
 import com.kyc3.timestampap.service.contracts.Erc20ContractService
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import org.web3j.crypto.Credentials
 import java.math.BigInteger
@@ -15,8 +16,11 @@ class RegistrationService(
     private val erc20ContractService: Erc20ContractService,
 ) {
 
+    private val log = LoggerFactory.getLogger(javaClass)
+
     @PostConstruct
     fun initiateRegistration() {
+        log.info("process='RegistrationService' message='requesting exchange keys'")
         oracleService.requestExchangeKeys()
     }
 
