@@ -21,7 +21,7 @@ attestation:
   redirect:
     base_url: ${ATTESTATION_REDIRECT_URL:http://localhost:4201}/attestation
 oracle:
-  address: ${ORACLE_ADDRESS:0xf2064cbc3c9f859780AE939739f8054E289d9542}
+  address: ${ORACLE_ADDRESS:0xf2064cbc3c9f859780ae939739f8054e289d9542}
   redirect:
     base_url: ${ORACLE_REDIRECT_URL:http://localhost:4200}/nft/purchase-complete
 
