@@ -10,8 +10,8 @@ class UserKeysService(
 ) {
 
   fun store(address: String, userKeys: UserKeys): Unit =
-    cache.put(address, userKeys)
+    cache.put(address.lowercase(), userKeys)
 
   fun getUserKeys(address: String): UserKeys? =
-    cache.get(address)
+    cache.get(address.lowercase())
 }
