@@ -25,11 +25,16 @@ class RegistrationService(
     }
 
     fun register(account: String) {
-        if (erc20ContractService.allowance(credentials.address, contractsProperties.cashier) <= BigInteger.ZERO) {
-            erc20ContractService.mint(credentials.address, BigInteger.valueOf(10000000000000000))
-            erc20ContractService.approve(contractsProperties.cashier, BigInteger.valueOf(10000000000000000))
-        }
-        oracleService.depositRequest(6000)
+        erc20ContractService.allowance(credentials.address, contractsProperties.cashier)
+            .thenAccept {
+                if ( it <= BigInteger.ZERO) {
+                erc20ContractService.mint(credentials.address, BigInteger.valueOf(10000000000000000))
+                    .join()
+                erc20ContractService.approve(contractsProperties.cashier, BigInteger.valueOf(10000000000000000))
+                    .join()
+            }
+                oracleService.depositRequest(6000)
+            }
     }
 
 }

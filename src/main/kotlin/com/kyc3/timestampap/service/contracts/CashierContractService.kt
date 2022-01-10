@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import org.web3j.protocol.core.methods.response.TransactionReceipt
 import java.math.BigInteger
+import java.util.concurrent.CompletableFuture
 
 @Service
 class CashierContractService(
@@ -12,9 +13,9 @@ class CashierContractService(
 ) {
     private val log = LoggerFactory.getLogger(javaClass)
 
-    fun requestTreasuryBalance(account: String): BigInteger =
+    fun requestTreasuryBalance(account: String): CompletableFuture<BigInteger> =
         cashierContractV2.balanceOf(account)
-            .send()
+            .sendAsync()
             .also {
                 log.info("process=CashierContractV3:requestTreasuryBalance account=$account balance=$it")
             }
