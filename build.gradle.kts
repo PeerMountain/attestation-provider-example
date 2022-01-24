@@ -61,7 +61,7 @@ dependencies {
 
   implementation("org.hibernate.validator:hibernate-validator:7.0.1.Final")
 
-  implementation("com.kyc3:oracle-definitions:b220af7")
+  implementation("com.kyc3:oracle-definitions:f43c6ab")
   implementation("org.ehcache:ehcache:3.1.3")
 
   runtimeOnly("io.r2dbc:r2dbc-postgresql")
